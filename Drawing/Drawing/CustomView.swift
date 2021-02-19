@@ -46,7 +46,7 @@ class CustomView: UIView {
                 let circle = Circle(with: radius, and: center, withSome: color, and: strokeWidth, isFilled: isFilled)
                 Default.allModels.append(circle)
             case .RECTANGLE:
-                let rect = Rectangle.init(p1: point1!, p2: point2, color: color, strokeWidth: strokeWidth, isFilled: false)
+                let rect = Rectangle.init(p1: point1!, p2: point2, color: color, strokeWidth: strokeWidth, isFilled: isFilled)
                 Default.allModels.append(rect)
             case .TRIANGLE:
                 let p1 = CGPoint(x: min(point1!.x, point2.x), y: min(point1!.y, point2.y))

@@ -10,7 +10,7 @@ import UIKit
 
 class Default{
     static var color: UIColor = .systemPink
-    static var isFilled: Bool = true
+    static var isFilled: Bool = false
     static var strokeWidth: CGFloat = 3
 //    var colors: Array<UIColor> = [.systemPink, .yellow, .blue, .purple, .green, .systemIndigo, .orange]
     static var allModels: Array<Shape> = []

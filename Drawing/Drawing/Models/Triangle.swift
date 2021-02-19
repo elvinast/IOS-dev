@@ -29,9 +29,9 @@ class Triangle: Shape {
     func drawPath() {
         let path = UIBezierPath()
         path.move(to: p1)
-        path.addLine(to: p1)
         path.addLine(to: p2)
-//        path.addLine(to: p3)
+        path.addLine(to: p3)
+        path.addLine(to: p1)
         path.lineWidth = strokeWidth
         color.set()
         (isFilled) ? (path.fill()) : (path.stroke())

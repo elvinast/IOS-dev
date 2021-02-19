@@ -11,6 +11,6 @@ import Foundation
     case CIRCLE
     case RECTANGLE
     case LINE
-    case PEN
     case TRIANGLE
+    case PEN
 }

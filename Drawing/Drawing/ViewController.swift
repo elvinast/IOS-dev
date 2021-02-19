@@ -45,9 +45,13 @@ class ViewController: UIViewController {
     
     @IBAction func modelPressed(_ sender: UIButton) {
         Default.curFigure = allModels[sender.tag]
+        print(sender.tag)
+//        print(sender.currentImage)
+        print(Default.curFigure)
     }
     @IBAction func colorPressed(_ sender: UIButton) {
         Default.color = colors[sender.tag]
+        print(sender.tag)
     }
     
 }
