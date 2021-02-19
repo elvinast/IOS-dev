@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E51CA0E225DEE72D00FC73F0 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51CA0E125DEE72C00FC73F0 /* Line.swift */; };
+		E51CA0E525DF9EDC00FC73F0 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51CA0E425DF9EDC00FC73F0 /* Shape.swift */; };
+		E51CA0E825DFA07200FC73F0 /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51CA0E725DFA07200FC73F0 /* Triangle.swift */; };
+		E51CA0EB25DFA2E400FC73F0 /* Pen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51CA0EA25DFA2E400FC73F0 /* Pen.swift */; };
+		E51CA0EF25DFA5F800FC73F0 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51CA0EE25DFA5F800FC73F0 /* Shapes.swift */; };
 		E5D908F725DACD320049AE59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D908F625DACD320049AE59 /* AppDelegate.swift */; };
 		E5D908F925DACD320049AE59 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D908F825DACD320049AE59 /* SceneDelegate.swift */; };
 		E5D908FB25DACD320049AE59 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D908FA25DACD320049AE59 /* ViewController.swift */; };
@@ -19,6 +24,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E51CA0E125DEE72C00FC73F0 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		E51CA0E425DF9EDC00FC73F0 /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
+		E51CA0E725DFA07200FC73F0 /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
+		E51CA0EA25DFA2E400FC73F0 /* Pen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pen.swift; sourceTree = "<group>"; };
+		E51CA0EE25DFA5F800FC73F0 /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		E5D908F325DACD320049AE59 /* Drawing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drawing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5D908F625DACD320049AE59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E5D908F825DACD320049AE59 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +88,11 @@
 			children = (
 				E5D9090E25DB82720049AE59 /* Circle.swift */,
 				E5D9091125DB82910049AE59 /* Rectangle.swift */,
+				E51CA0E125DEE72C00FC73F0 /* Line.swift */,
+				E51CA0E425DF9EDC00FC73F0 /* Shape.swift */,
+				E51CA0E725DFA07200FC73F0 /* Triangle.swift */,
+				E51CA0EA25DFA2E400FC73F0 /* Pen.swift */,
+				E51CA0EE25DFA5F800FC73F0 /* Shapes.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -165,9 +180,14 @@
 				E5D9090F25DB82720049AE59 /* Circle.swift in Sources */,
 				E5D908FB25DACD320049AE59 /* ViewController.swift in Sources */,
 				E5D9090C25DACDEE0049AE59 /* CustomView.swift in Sources */,
+				E51CA0E825DFA07200FC73F0 /* Triangle.swift in Sources */,
 				E5D9091225DB82910049AE59 /* Rectangle.swift in Sources */,
+				E51CA0EB25DFA2E400FC73F0 /* Pen.swift in Sources */,
 				E5D908F725DACD320049AE59 /* AppDelegate.swift in Sources */,
+				E51CA0E225DEE72D00FC73F0 /* Line.swift in Sources */,
+				E51CA0EF25DFA5F800FC73F0 /* Shapes.swift in Sources */,
 				E5D908F925DACD320049AE59 /* SceneDelegate.swift in Sources */,
+				E51CA0E525DF9EDC00FC73F0 /* Shape.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

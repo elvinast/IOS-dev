@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class Circle{
+class Circle: Shape{
     
     private var radius: CGFloat
     private var circleCenter: CGPoint
