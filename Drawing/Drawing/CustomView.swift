@@ -10,7 +10,7 @@ import UIKit
 class CustomView: UIView {
 
     var point1: CGPoint?
-    var point2: CGPoint! //if there is a point1,  there will be point2
+    var point2: CGPoint!
     
 //    var color: UIColor = .systemPink
 //    var isFilled: Bool = true
@@ -24,10 +24,6 @@ class CustomView: UIView {
         for model in Default.allModels{
             model.drawPath()
         }
-//        if let p1 = point1{
-//            let rect = Rectangle.init(p1: p1, p2: point2, color: .purple, strokeWidth: 3, isFilled: false)
-//            rect.drawPath()
-//        }
     }
     
     func createNewModel(){
@@ -53,11 +49,6 @@ class CustomView: UIView {
                 let p2 = CGPoint(x: max(point1!.x, point2.x), y: max(point1!.y, point2.y))
                 let triangle = Triangle(p1: p1, p2: p2, color: color, strokeWidth: strokeWidth, isFilled: isFilled)
                 Default.allModels.append(triangle)
-//            case .PEN:
-//                let line =  Line(p1: point1!, p2: point2, color: color, strokeWidth: strokeWidth)
-//                Default.allModels.append(line)
-            default:
-                break
             }
         }
     }
@@ -76,7 +67,6 @@ class CustomView: UIView {
                 point1 = point2
                 setNeedsDisplay()
             }
-//            point2 = touch.location(in: self)
         }
     }
     

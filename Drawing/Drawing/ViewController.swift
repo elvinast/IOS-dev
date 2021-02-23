@@ -19,21 +19,21 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector (tap))
-        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(long))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector (tapped))
+        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
         tapGesture.numberOfTapsRequired = 1
         removeButton.addGestureRecognizer(tapGesture)
         removeButton.addGestureRecognizer(longGesture)
     }
     
-    @objc func tap() {
+    @objc func tapped() {
         if Default.allModels.count > 0 {
             Default.allModels.removeLast()
             myCustomView.setNeedsDisplay()
         }
     }
 
-    @objc func long() {
+    @objc func longPressed() {
         if Default.allModels.count > 0 {
             Default.allModels.removeAll()
             myCustomView.setNeedsDisplay()
@@ -45,13 +45,12 @@ class ViewController: UIViewController {
     
     @IBAction func modelPressed(_ sender: UIButton) {
         Default.curFigure = allModels[sender.tag]
-        print(sender.tag)
-//        print(sender.currentImage)
-        print(Default.curFigure)
+//        print(sender.tag)
+//        print(Default.curFigure)
     }
     @IBAction func colorPressed(_ sender: UIButton) {
         Default.color = colors[sender.tag]
-        print(sender.tag)
+//        print(sender.tag)
     }
     
 }
