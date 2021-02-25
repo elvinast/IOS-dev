@@ -6,25 +6,26 @@
 //
 
 import UIKit
+import WebKit
 
 class InfoVC: UIViewController {
     
-    @IBOutlet weak var myText: UILabel!
-    var txt: String?{
-        didSet{
-            if myText != nil{
-                updateUI()
-            }
-        }
-    }
+    @IBOutlet weak var webView: WKWebView!
+    var webURL: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateUI()
+//        updateUI()
+        if let curUrl = NSURL(string: self.webURL){
+            let request = NSURLRequest(url: curUrl as URL)
+            self.webView.load(request as URLRequest)
+        }
     }
     
-    func updateUI(){
-        myText.text = txt
-    }
+//    func updateUI(){
+//        myText.text = txt
+//    }
+    
     /*
     // MARK: - Navigation
 

@@ -11,9 +11,9 @@ class BrowserVC: UITableViewController {
 
     private var browsers: [BrowserModel] =
         [
-             BrowserModel(name: "Google"),
-             BrowserModel(name: "Yahoo"),
-             BrowserModel(name: "Yandex")
+             BrowserModel(name: "Google", link: "https://www.google.com/"),
+            BrowserModel(name: "Yahoo", link: "https://www.yahoo.com/"),
+            BrowserModel(name: "Yandex", link: "https://yandex.kz/")
         ]
     
     override func viewDidLoad() {
@@ -87,7 +87,7 @@ class BrowserVC: UITableViewController {
             if let navCon = segue.destination as? UINavigationController{
                 if let destination = navCon.visibleViewController as? InfoVC{
                     if let row = tableView.indexPathForSelectedRow?.row{
-                        destination.txt = browsers[row].name
+                        destination.webURL = browsers[row].link!
                         destination.navigationItem.title = browsers[row].name
                     }
                 }

@@ -56,7 +56,18 @@
                             <outlet property="delegate" destination="t3Z-dt-y2U" id="HBr-eY-gzX"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="tXy-F6-UlB"/>
+                    <navigationItem key="navigationItem" id="tXy-F6-UlB">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="EcF-Pn-sci">
+                            <rect key="frame" x="176.5" y="8.5" width="167" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="List"/>
+                                <segment title="Favourites"/>
+                            </segments>
+                        </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="4CY-yc-yj9"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AB5-8I-A68" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -70,20 +81,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="820" height="1180"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UyB-tn-xeR">
-                                <rect key="frame" x="371" y="529" width="255" height="123"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uNf-3A-MPO">
+                                <rect key="frame" x="0.0" y="50" width="820" height="1110"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="U2i-vI-UUZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="uNf-3A-MPO" firstAttribute="top" secondItem="U2i-vI-UUZ" secondAttribute="top" id="8cn-KB-6Sq"/>
+                            <constraint firstItem="U2i-vI-UUZ" firstAttribute="trailing" secondItem="uNf-3A-MPO" secondAttribute="trailing" id="9hZ-7o-UvZ"/>
+                            <constraint firstItem="U2i-vI-UUZ" firstAttribute="bottom" secondItem="uNf-3A-MPO" secondAttribute="bottom" id="c1U-mr-GXl"/>
+                            <constraint firstItem="uNf-3A-MPO" firstAttribute="leading" secondItem="U2i-vI-UUZ" secondAttribute="leading" id="xGO-TU-dPp"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9ZL-Zh-t97"/>
                     <connections>
-                        <outlet property="myText" destination="UyB-tn-xeR" id="5Gk-CV-9vu"/>
+                        <outlet property="webView" destination="uNf-3A-MPO" id="ydi-ie-6Df"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uh3-qq-Qji" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
