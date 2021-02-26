@@ -9,7 +9,7 @@ import UIKit
 import WebKit
 
 protocol DetailViewDelegate {
-    func updateTableViewController()
+    func updateVC()
 }
 
 class InfoVC: UIViewController {
@@ -28,28 +28,28 @@ class InfoVC: UIViewController {
             let request = URLRequest(url: curUrl!)
             webView.load(request)
             
-            let tap = UITapGestureRecognizer(target: self, action: #selector(tripleTapped))
+            let tap = UITapGestureRecognizer(target: self, action: #selector(addToFav))
             tap.numberOfTapsRequired = 3
             view.addGestureRecognizer(tap)
         }
         changeColor()
     }
     
-    @objc func tripleTapped() {
-        BrowserArray.browsers[curIdx!].isFav = !BrowserArray.browsers[curIdx!].isFav
+    @objc func addToFav() {
+        BrowserArray.browsers[curIdx!].isFav.toggle()
         changeColor()
-        delegate?.updateTableViewController()
+        delegate?.updateVC()
     }
     
     func changeColor(){
         if let index = curIdx{
-            if BrowserArray.browsers[index].isFav{
+            if BrowserArray.browsers[index].isFav {
                 navigationController?.navigationBar.backgroundColor = .systemYellow
-                print("change")
+//                print("change")
             }
             else{
                 navigationController?.navigationBar.backgroundColor = .white
-                print("back to white")
+//                print("back to white")
             }
         }
     }

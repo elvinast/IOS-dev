@@ -23,4 +23,8 @@ struct BrowserArray{
             BrowserModel(name: "Leetcode", link: "https://leetcode.com/"),
             BrowserModel(name: "Github", link: "https://github.com/elvinast")
         ]
+    
+    func removeBrowser(index: Int){
+        BrowserArray.browsers.remove(at: index)
+    }
 }
