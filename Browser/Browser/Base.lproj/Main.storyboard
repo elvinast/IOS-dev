@@ -65,9 +65,19 @@
                                 <segment title="List"/>
                                 <segment title="Favourites"/>
                             </segments>
+                            <connections>
+                                <action selector="segmentTypes:" destination="t3Z-dt-y2U" eventType="valueChanged" id="ZTN-Te-UTN"/>
+                            </connections>
                         </segmentedControl>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="4CY-yc-yj9"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="4CY-yc-yj9">
+                            <connections>
+                                <action selector="addBrowser:" destination="t3Z-dt-y2U" id="sfz-gK-AZS"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mySegment" destination="EcF-Pn-sci" id="52s-g2-srO"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AB5-8I-A68" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -146,7 +156,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6K3-XC-Ckq"/>
+        <segue reference="qJ9-Si-uLB"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
