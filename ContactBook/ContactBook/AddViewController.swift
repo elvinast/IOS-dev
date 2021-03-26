@@ -23,7 +23,7 @@ class AddViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         super.viewDidLoad()
         self.genderPicker.delegate = self
         self.genderPicker.dataSource = self
-        pickerData = ["female", "male"]
+        pickerData = ["beginner", "intermediate", "advanced"]
     }
     
     
