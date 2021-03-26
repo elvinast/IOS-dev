@@ -14,7 +14,6 @@
 		E570412B260B163D00F10D51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E570412A260B163D00F10D51 /* Assets.xcassets */; };
 		E570412E260B163D00F10D51 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E570412C260B163D00F10D51 /* LaunchScreen.storyboard */; };
 		E5704138260CD3CF00F10D51 /* MapKitDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E5704136260CD3CE00F10D51 /* MapKitDemo.xcdatamodeld */; };
-		E570413F260DD69D00F10D51 /* CustomPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E570413E260DD69D00F10D51 /* CustomPin.swift */; };
 		E5704142260DD7B600F10D51 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5704141260DD7B600F10D51 /* CustomCell.swift */; };
 		E5704145260DDB7F00F10D51 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5704144260DDB7F00F10D51 /* EditViewController.swift */; };
 /* End PBXBuildFile section */
@@ -29,7 +28,6 @@
 		E570412D260B163D00F10D51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E570412F260B163D00F10D51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E5704137260CD3CF00F10D51 /* MapKitDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MapKitDemo.xcdatamodel; sourceTree = "<group>"; };
-		E570413E260DD69D00F10D51 /* CustomPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPin.swift; sourceTree = "<group>"; };
 		E5704141260DD7B600F10D51 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		E5704144260DDB7F00F10D51 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,7 +70,6 @@
 				E570412C260B163D00F10D51 /* LaunchScreen.storyboard */,
 				E570412F260B163D00F10D51 /* Info.plist */,
 				E5704136260CD3CE00F10D51 /* MapKitDemo.xcdatamodeld */,
-				E570413E260DD69D00F10D51 /* CustomPin.swift */,
 				E5704141260DD7B600F10D51 /* CustomCell.swift */,
 				E5704144260DDB7F00F10D51 /* EditViewController.swift */,
 			);
@@ -154,7 +151,6 @@
 				E5704138260CD3CF00F10D51 /* MapKitDemo.xcdatamodeld in Sources */,
 				E5704124260B163900F10D51 /* SceneDelegate.swift in Sources */,
 				E5704142260DD7B600F10D51 /* CustomCell.swift in Sources */,
-				E570413F260DD69D00F10D51 /* CustomPin.swift in Sources */,
 				E5704145260DDB7F00F10D51 /* EditViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

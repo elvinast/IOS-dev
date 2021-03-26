@@ -9,6 +9,20 @@ import UIKit
 import MapKit
 import CoreData
 
+class CustomPin: NSObject, MKAnnotation{
+    
+    var coordinate: CLLocationCoordinate2D
+    var title: String?
+    var subtitle: String?
+    
+    init(title: String, subtitle: String, coordinate: CLLocationCoordinate2D){
+        self.title = title
+        self.subtitle = subtitle
+        self.coordinate = coordinate
+    }
+}
+
+
 class ViewController: UIViewController, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, changePlace {
     func change(_ title: String, _ subtitle: String) {
         let index = places.firstIndex(where: {$0.title == selectedAnnotation?.title && $0.subtitle == selectedAnnotation?.subtitle})!
@@ -140,18 +154,18 @@ class ViewController: UIViewController, MKMapViewDelegate, UITableViewDelegate, 
         }
     }
     
-//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//        if annotation is MKUserLocation {
-//            return nil
-//        }
-//        let annotaionView = MKAnnotationView(annotation: annotation, reuseIdentifier: "customannotation")
-//        annotaionView.image = UIImage(named: "pin")
-//        annotaionView.canShowCallout = true
-//        let btn = UIButton(type: .detailDisclosure)
-//        annotaionView.rightCalloutAccessoryView = btn
-//        btn.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-//        return annotaionView
-//    }
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            return nil
+        }
+        let annotaionView = MKAnnotationView(annotation: annotation, reuseIdentifier: "customannotation")
+        annotaionView.image = UIImage(named: "pin")
+        annotaionView.canShowCallout = true
+        let btn = UIButton(type: .detailDisclosure)
+        annotaionView.rightCalloutAccessoryView = btn
+        btn.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        return annotaionView
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return places.count
