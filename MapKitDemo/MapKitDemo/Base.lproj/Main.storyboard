@@ -33,7 +33,7 @@
                                                 <segment title="Hybrid"/>
                                             </segments>
                                             <connections>
-                                                <action selector="segmentedChanged:" destination="mvF-Jb-jxt" eventType="valueChanged" id="ecl-Mo-24R"/>
+                                                <action selector="segmentChanged:" destination="mvF-Jb-jxt" eventType="valueChanged" id="8sN-o0-C9G"/>
                                             </connections>
                                         </segmentedControl>
                                     </subviews>

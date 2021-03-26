@@ -216,17 +216,17 @@ class ViewController: UIViewController, MKMapViewDelegate, UITableViewDelegate, 
         present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func segmentSelected(_ sender: UISegmentedControl) {
-        switch mySegm.selectedSegmentIndex {
-        case 0:
-            myMap.mapType = .standard
-        case 1:
-            myMap.mapType = .satellite
-        case 2:
-            myMap.mapType = .hybrid
-        default:
-            break
-        }
+    @IBAction func segmentChanged(_ sender: UISegmentedControl) {
+            switch mySegm.selectedSegmentIndex {
+            case 0:
+                myMap.mapType = .standard
+            case 1:
+                myMap.mapType = .satellite
+            case 2:
+                myMap.mapType = .hybrid
+            default:
+                break
+            }
 //        myMap.mapType = mapType[sender.selectedSegmentIndex] ?? .standard
     }
 
