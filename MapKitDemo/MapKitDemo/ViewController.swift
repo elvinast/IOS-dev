@@ -9,21 +9,10 @@ import UIKit
 import MapKit
 import CoreData
 
-class CustomPin: NSObject, MKAnnotation{
-    
-    var coordinate: CLLocationCoordinate2D
-    var title: String?
-    var subtitle: String?
-    
-    init(title: String, subtitle: String, coordinate: CLLocationCoordinate2D){
-        self.title = title
-        self.subtitle = subtitle
-        self.coordinate = coordinate
-    }
-}
 
 
 class ViewController: UIViewController, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, changePlace {
+    
     func change(_ title: String, _ subtitle: String) {
         let index = places.firstIndex(where: {$0.title == selectedAnnotation?.title && $0.subtitle == selectedAnnotation?.subtitle})!
         let indexInAnn = self.myMap.annotations.firstIndex(where: {$0.title == places[index].title && $0.subtitle == places[index].subtitle})!
@@ -40,10 +29,11 @@ class ViewController: UIViewController, MKMapViewDelegate, UITableViewDelegate, 
     @IBOutlet weak var myMap: MKMapView!
     @IBOutlet weak var mySegm: UISegmentedControl!
     @IBOutlet weak var navView: UIVisualEffectView!
+    
     var mapType: [Int: MKMapType] = [0: .hybrid, 1: .standard, 2: .satellite]
     var places: [Place] = []
     override func viewDidLoad() {
-        myTable.separatorColor = .clear
+//        myTable.separatorColor = .clear
         super.viewDidLoad()
         myTable.isHidden = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
@@ -52,18 +42,19 @@ class ViewController: UIViewController, MKMapViewDelegate, UITableViewDelegate, 
         places = loadData()
         showData(places)
         let longPressGestureRecogn = UILongPressGestureRecognizer(target: self, action: #selector(addAnnotation(press:)))
-        longPressGestureRecogn.minimumPressDuration = 2.0
+        longPressGestureRecogn.minimumPressDuration = 1.0
         myMap.addGestureRecognizer(longPressGestureRecogn)
     }
     
     @IBAction func tableViewPressed(_ sender: UIBarButtonItem) {
-        if (myTable.isHidden == true) {
+        if (myTable.isHidden) {
             myTable.isHidden = false
             let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.regular)
             let blurView = UIVisualEffectView(effect: blurEffect)
             blurView.frame = myMap.bounds
             myMap.addSubview(blurView)
-        }else{
+        }
+        else{
             myTable.isHidden = true
             myMap.subviews[myMap.subviews.count - 1].removeFromSuperview()
         }
@@ -76,6 +67,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UITableViewDelegate, 
         self.myMap?.selectAnnotation(self.myMap.annotations[index!], animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
     @objc func doubleTapped(tap: UITapGestureRecognizer) {
         if (tap.state == UIGestureRecognizer.State.ended) {
             if (self.myMap?.annotations.count != 0 ){
@@ -189,18 +181,17 @@ class ViewController: UIViewController, MKMapViewDelegate, UITableViewDelegate, 
         }
     }
         
-        @objc func buttonAction(sender: UIButton!) {
-            let editVC = self.storyboard?.instantiateViewController(withIdentifier: "EditViewController") as! EditViewController
-            navigationController?.pushViewController(editVC, animated: true)
-            editVC.titleStr = selectedAnnotation?.title
-            editVC.subtitleStr = selectedAnnotation?.subtitle
-            editVC.changeDelegate = self
-            print("Button tapped")
-        }
+    @objc func buttonAction(sender: UIButton!) {
+        let editVC = self.storyboard?.instantiateViewController(withIdentifier: "EditViewController") as! EditViewController
+        navigationController?.pushViewController(editVC, animated: true)
+        editVC.titleStr = selectedAnnotation?.title
+        editVC.subtitleStr = selectedAnnotation?.subtitle
+        editVC.changeDelegate = self
+        print("Button tapped")
+    }
     
     @IBAction func longTapped(_ sender: UILongPressGestureRecognizer) {
-        
-        //convert CGPoint to CLLocation2D
+        //converts CGPoint to CLLocation2D
         let touchPoint = sender.location(in: myMap)
         let coordinate = self.myMap.convert(touchPoint, toCoordinateFrom: self.myMap)
         

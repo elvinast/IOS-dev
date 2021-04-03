@@ -13,10 +13,11 @@ protocol changePlace {
 }
 
 class EditViewController: UIViewController {
-    var changeDelegate: changePlace?
     
+    var changeDelegate: changePlace?
     var titleStr: String?
     var subtitleStr: String?
+    
     @IBOutlet weak var titleTF: UITextField!
     @IBOutlet weak var subtitleTF: UITextField!
     override func viewDidLoad() {
@@ -28,12 +29,13 @@ class EditViewController: UIViewController {
     }
     
     @objc func addTapped() {
-        print("h")
+        print("added 1")
         changeDelegate?.change(titleTF.text!, subtitleTF.text!)
         navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
     @objc func cancelPressed(sender: UIButton!) {
+        print("canceled 1")
         navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }

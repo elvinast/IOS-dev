@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TEe-dw-q1x">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="ZY1-k7-bDO">
+            <objects>
+                <viewController id="TEe-dw-q1x" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="c4w-GS-DuB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mrj-ql-ZHu">
+                                <rect key="frame" x="179.5" y="438" width="55" height="30"/>
+                                <state key="normal" title="Let's go"/>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="custom" customClass="CustomSegue" customModule="AnimationsDemo" customModuleProvider="target" id="DEp-xW-Shx"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="PH1-ol-pcn"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Mrj-ql-ZHu" firstAttribute="centerX" secondItem="PH1-ol-pcn" secondAttribute="centerX" id="IiI-lZ-jOD"/>
+                            <constraint firstItem="Mrj-ql-ZHu" firstAttribute="centerY" secondItem="PH1-ol-pcn" secondAttribute="centerY" id="awB-wv-Lsj"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f9Q-dN-E4b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-802" y="106"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AnimationsDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="XuM-Wc-BPD">
+                                <rect key="frame" x="67" y="313" width="280" height="280"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Ahe-Fb-ILO">
+                                <rect key="frame" x="5" y="832" width="404" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QfD-ZR-nsr">
+                                        <rect key="frame" x="0.0" y="0.0" width="85" height="30"/>
+                                        <state key="normal" title="Fade out"/>
+                                        <connections>
+                                            <action selector="animatePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TWU-30-2q4"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R1S-DO-FE5">
+                                        <rect key="frame" x="100" y="0.0" width="50" height="30"/>
+                                        <state key="normal" title="Fade in"/>
+                                        <connections>
+                                            <action selector="animatePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aou-Fl-bMk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53O-gr-9UA">
+                                        <rect key="frame" x="165" y="0.0" width="38" height="30"/>
+                                        <state key="normal" title="Move"/>
+                                        <connections>
+                                            <action selector="animatePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PJw-tA-X7K"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hnw-bB-Zge">
+                                        <rect key="frame" x="218" y="0.0" width="34" height="30"/>
+                                        <state key="normal" title="Back"/>
+                                        <connections>
+                                            <action selector="animatePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aAQ-c1-tat"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJE-OM-ieu">
+                                        <rect key="frame" x="267" y="0.0" width="56" height="30"/>
+                                        <state key="normal" title="Zoom in"/>
+                                        <connections>
+                                            <action selector="animatePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="84q-t2-tuv"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xIT-tj-Ilx">
+                                        <rect key="frame" x="338" y="0.0" width="66" height="30"/>
+                                        <state key="normal" title="Zoom out"/>
+                                        <connections>
+                                            <action selector="animatePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7sr-Q2-5IP"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ahe-Fb-ILO" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="7ja-kP-q6r"/>
+                            <constraint firstItem="XuM-Wc-BPD" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="KX0-dg-DBk"/>
+                            <constraint firstItem="Ahe-Fb-ILO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="gJD-FG-deC"/>
+                            <constraint firstItem="XuM-Wc-BPD" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="yxq-cc-RCf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ahe-Fb-ILO" secondAttribute="trailing" constant="5" id="yzl-Ky-nUS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="targetImage" destination="XuM-Wc-BPD" id="OhQ-oO-r1Q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="35" y="94"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icon" width="280" height="280"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
