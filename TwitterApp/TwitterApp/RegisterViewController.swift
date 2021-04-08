@@ -8,11 +8,15 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FirebaseDatabase
 
 class RegisterViewController: UIViewController {
 
-    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var surnameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,19 +25,38 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func registerClicked(_ sender: UIButton) {
+        let name = nameField.text
+        let surname = surnameField.text
         let email = emailField.text
         let password = passwordField.text
-        if email != "" && password != ""{
+        if email != "" && password != "" {
             indicator.startAnimating()
             Auth.auth().createUser(withEmail: email!, password: password!) { [weak self] (result, error) in
                 self?.indicator.stopAnimating()
+//                print(email)
                 self?.sendMessageToEmail()
+//                print("hi2")
                 if error == nil{
-                    self?.showMessage(title: "Success", message: "Please verify your email")
+//                    print("hi1")
+                    if name != "" && surname != ""{
+//                        print("hi")
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd"
+                        let date = dateFormatter.string(from: (self?.datePicker.date)!)
+                        let userData = [
+                            "email": email!,
+                            "surname": surname!,
+                            "name": name!,
+                            "date": date
+                        ]
+                        Database.database().reference().child("users").child(result!.user.uid).setValue(userData)
+                        self?.showMessage(title: "Success", message: "Please verify your email")
+                    }
                 }
                 else{
                     self?.showMessage(title: "Error", message: "Some problem occured")
                 }
+                
             }
         }
     }

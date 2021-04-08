@@ -18,6 +18,7 @@
 		E513391B261DC40300469C90 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E513391A261DC40300469C90 /* MainViewController.swift */; };
 		E513391E261DCE6E00469C90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E513391D261DCE6E00469C90 /* GoogleService-Info.plist */; };
 		E513393E261E018B00469C90 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E513393D261E018B00469C90 /* Tweet.swift */; };
+		E5689C64261FA19400DFC69C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5689C63261FA19400DFC69C /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		E513391A261DC40300469C90 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E513391D261DCE6E00469C90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E513393D261E018B00469C90 /* Tweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		E5689C63261FA19400DFC69C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E9BEBA3A7E0212A92F2CC885 /* Pods-TwitterApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwitterApp.release.xcconfig"; path = "Target Support Files/Pods-TwitterApp/Pods-TwitterApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +101,7 @@
 				E513391A261DC40300469C90 /* MainViewController.swift */,
 				E513391D261DCE6E00469C90 /* GoogleService-Info.plist */,
 				E513393D261E018B00469C90 /* Tweet.swift */,
+				E5689C63261FA19400DFC69C /* ProfileViewController.swift */,
 			);
 			path = TwitterApp;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 				E51338FF261DC35B00469C90 /* AppDelegate.swift in Sources */,
 				E5133901261DC35B00469C90 /* SceneDelegate.swift in Sources */,
 				E513393E261E018B00469C90 /* Tweet.swift in Sources */,
+				E5689C64261FA19400DFC69C /* ProfileViewController.swift in Sources */,
 				E5133918261DC3ED00469C90 /* RegisterViewController.swift in Sources */,
 				E513391B261DC40300469C90 /* MainViewController.swift in Sources */,
 			);

@@ -63,10 +63,11 @@ class LoginViewController: UIViewController {
     
     func goToMainPage(){
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        if let mainPage = storyboard.instantiateViewController(identifier: "MainViewController") as? MainViewController{
+        if let mainPage = storyboard.instantiateViewController(identifier: "ProfileViewController") as? ProfileViewController{
             mainPage.modalPresentationStyle = .fullScreen
             present(mainPage, animated: true, completion: nil)
         }
     }
+    
 
 }
