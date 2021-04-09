@@ -14,7 +14,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBOutlet weak var myTableView: UITableView!
     
+    @IBOutlet weak var userNameSurname: UILabel!
+    @IBOutlet weak var userBirthday: UILabel!
     @IBOutlet weak var myImageView: UIImageView!
+    
     var myTweets: [Tweet] = []
     var currentUser: User?
     
@@ -33,6 +36,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         currentUser = Auth.auth().currentUser
+        
         let parent = Database.database().reference().child("tweets")
         parent.observe(.value) { [weak self] (snapshot) in
             self?.myTweets.removeAll()
@@ -46,6 +50,39 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
             self?.myTweets.reverse()
             self?.myTableView.reloadData()
+        }
+        
+//        let users = Database.database().reference().child("users")
+        let ref = Database.database().reference()
+//        ref.child("users/\(currentUser?.uid)/name").getData { [self] (error, snapshot) in
+//            if let error = error {
+//                    print("Error getting data \(error)")
+//                }
+//                else if snapshot.exists() {
+//                    print("Got data \(snapshot.value!)")
+//                }
+//                else {
+//                    print(ref.child("users/\(currentUser?.uid)/"))
+//                    print("No data available")
+//                }
+//        }
+//        print(users)
+//        users.observe(DataEventType.value) { (snapshot) in
+//            let postDict = snapshot.value as? [String : AnyObject] ?? [:]
+//        }
+        
+        let userID = Auth.auth().currentUser?.uid
+        ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+          // Get user value
+            let value = snapshot.value as? NSDictionary
+            let name = value?["name"] as? String ?? ""
+            let surname = value?["surname"] as? String ?? ""
+            let date = value?["date"] as? String ?? ""
+//          print(name)
+            self.userNameSurname.text = name + " " + surname
+            self.userBirthday.text = date
+          }) { (error) in
+            print(error.localizedDescription)
         }
     }
     
@@ -80,6 +117,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             mainPage.modalPresentationStyle = .fullScreen
             present(mainPage, animated: true, completion: nil)
         }
+    }
+    @IBAction func addNewTweet(_ sender: UIButton) {
+        
     }
 }
 

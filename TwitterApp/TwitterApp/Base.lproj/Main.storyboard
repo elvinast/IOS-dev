@@ -393,6 +393,9 @@
                                         <integer key="value" value="15"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addNewTweet:" destination="FXj-TB-k5v" eventType="touchUpInside" id="DFT-QH-r3M"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZz-KH-crE">
                                 <rect key="frame" x="107" y="92" width="200" height="200"/>
@@ -429,6 +432,8 @@
                     <connections>
                         <outlet property="myImageView" destination="fJW-Aq-O3f" id="nMC-hP-6qz"/>
                         <outlet property="myTableView" destination="Gl2-2U-Qfc" id="dCZ-HO-DWR"/>
+                        <outlet property="userBirthday" destination="aUX-4g-EEZ" id="gPg-IK-7ZK"/>
+                        <outlet property="userNameSurname" destination="DGd-OE-js8" id="dWO-xU-fBe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9nh-Vd-Um4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
