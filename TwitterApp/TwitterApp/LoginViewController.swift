@@ -25,7 +25,7 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         currentUser = Auth.auth().currentUser
         if currentUser != nil && currentUser!.isEmailVerified {
-            goToMainPage()
+            goToProfilePage()
         }
     }
     
@@ -39,7 +39,7 @@ class LoginViewController: UIViewController {
                 self?.indicator.stopAnimating()
                 if error == nil{
                     if Auth.auth().currentUser!.isEmailVerified{
-                        self?.goToMainPage()
+                        self?.goToProfilePage()
                     }
                     else{
                         self?.showMessage(title: "Warning!", message: "Your email is not verified.")
@@ -61,7 +61,7 @@ class LoginViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func goToMainPage(){
+    func goToProfilePage(){
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         if let mainPage = storyboard.instantiateViewController(identifier: "ProfileViewController") as? ProfileViewController{
             mainPage.modalPresentationStyle = .fullScreen

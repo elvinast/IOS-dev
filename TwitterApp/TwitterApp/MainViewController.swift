@@ -45,48 +45,27 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    @IBAction func signOut(_ sender: UIBarButtonItem) {
-        do{
-            try Auth.auth().signOut()
-        } catch{
-            print("Error message")
+    @IBAction func goToProfile(_ sender: UIBarButtonItem) {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        if let mainPage = storyboard.instantiateViewController(identifier: "ProfileViewController") as? ProfileViewController{
+            mainPage.modalPresentationStyle = .fullScreen
+            present(mainPage, animated: true, completion: nil)
         }
-        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func composeTweet(_ sender: UIBarButtonItem) {
-        //1. Create the alert controller.
         let alert = UIAlertController(title: "New tweet", message: "Enter a text", preferredStyle: .alert)
-
-        //2. Add the text field. You can configure it however you need.
         alert.addTextField { (textField) in
             textField.placeholder = "What's up?"
         }
-
-        // 3. Grab the value from the text field, and print it when the user clicks OK.
         alert.addAction(UIAlertAction(title: "Tweet", style: .default, handler: { [weak alert] (_) in
-            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+            let textField = alert?.textFields![0]
             let tweet = Tweet(textField!.text!, (self.currentUser?.email)!)
             Database.database().reference().child("tweets").childByAutoId().setValue(tweet.dict)
         }))
-        
-        // 3. Grab the value from the text field, and print it when the user clicks OK.
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak alert] (_) in
             
         }))
-
-        // 4. Present the alert.
         self.present(alert, animated: true, completion: nil)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

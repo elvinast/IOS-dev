@@ -14,6 +14,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBOutlet weak var myTableView: UITableView!
     
+    @IBOutlet weak var myImageView: UIImageView!
     var myTweets: [Tweet] = []
     var currentUser: User?
     
@@ -23,6 +24,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
+        cell.textLabel?.text = myTweets[indexPath.row].content
+        cell.detailTextLabel?.text = myTweets[indexPath.row].author
         return cell
     }
     
@@ -36,11 +39,13 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             for child in snapshot.children{
                 if let snap = child as? DataSnapshot{
                     let tweet = Tweet(snapshot: snap)
-                    self?.myTweets.append(tweet)
+                    if tweet.author == self?.currentUser?.email{
+                        self?.myTweets.append(tweet)
+                    }
                 }
             }
             self?.myTweets.reverse()
-//            self?.myTableView.reloadData()
+            self?.myTableView.reloadData()
         }
     }
     
@@ -50,17 +55,43 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         } catch{
             print("Error message")
         }
-        self.dismiss(animated: true, completion: nil)
+        goToLoginPage()
+//        self.dismiss(animated: true, completion: nil)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func goToAllTweets(_ sender: UIBarButtonItem) {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        if let mainPage = storyboard.instantiateViewController(identifier: "MainViewController") as? MainViewController{
+            mainPage.modalPresentationStyle = .fullScreen
+            present(mainPage, animated: true, completion: nil)
+        }
     }
-    */
-
+    @IBAction func photoPickerButton(_ sender: UIButton) {
+        let vc = UIImagePickerController()
+        vc.sourceType = .photoLibrary
+        vc.delegate = self
+        vc.allowsEditing = true
+        present(vc, animated: true)
+    }
+    
+    func goToLoginPage(){
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        if let mainPage = storyboard.instantiateViewController(identifier: "LoginViewController") as? LoginViewController{
+            mainPage.modalPresentationStyle = .fullScreen
+            present(mainPage, animated: true, completion: nil)
+        }
+    }
 }
+
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage{
+                    myImageView.image = image
+                }
+        picker.dismiss(animated: true, completion: nil)
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
+
