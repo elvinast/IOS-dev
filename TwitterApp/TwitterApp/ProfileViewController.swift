@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
+import FirebaseStorage
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -20,6 +21,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var myTweets: [Tweet] = []
     var currentUser: User?
+    
+    private let storage = Storage.storage().reference()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         myTweets.count
@@ -79,11 +82,27 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             let surname = value?["surname"] as? String ?? ""
             let date = value?["date"] as? String ?? ""
 //          print(name)
-            self.userNameSurname.text = name + " " + surname
-            self.userBirthday.text = date
+            self.userNameSurname.text = "\(name) \(surname)"
+            self.userBirthday.text = "Birthday: \(date)"
           }) { (error) in
             print(error.localizedDescription)
         }
+        
+        guard let urlString = UserDefaults.standard.value(forKey: "url") as? String,
+            let url = URL(string: urlString) else {
+                return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            DispatchQueue.main.async { // to make sure that UI is updated as soon as we get the response
+                let image = UIImage(data: data)
+                self.myImageView.image = image
+            }
+        })
+        task.resume()
     }
     
     @IBAction func signOut(_ sender: UIBarButtonItem) {
@@ -125,10 +144,36 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        var img = UIImage()
         if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage{
                     myImageView.image = image
+                    img = image
                 }
         picker.dismiss(animated: true, completion: nil)
+        
+        guard let imageData = myImageView.image?.pngData() else{
+            return
+        }
+        
+        storage.child("images/file.png").putData(imageData, metadata: nil) { _, error in
+            guard error == nil else {
+                print("Failed to upload")
+                return
+            }
+            self.storage.child("images/file.png").downloadURL { url, error in
+                guard let url = url, error == nil else{
+                    return
+                }
+                let urlString = url.absoluteString
+                
+                DispatchQueue.main.async {
+                    self.myImageView.image = img
+                }
+                
+                print("Download URL: \(urlString)")
+                UserDefaults.standard.set(urlString, forKey: "url")
+            }
+        }
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
