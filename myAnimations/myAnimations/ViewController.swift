@@ -32,7 +32,7 @@ class ViewController: UIViewController {
     func animateTextFields() {
         self.mailTextField.center = CGPoint(x: -200, y: self.mailTextField.frame.midY)
         self.passwordTextField.center = CGPoint(x: self.view.bounds.width + 200, y: self.passwordTextField.frame.midY)
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 3) {
             self.mailTextField.center = CGPoint(x: self.view.bounds.width / 2, y: self.mailTextField.frame.midY)
             self.passwordTextField.center = CGPoint(x: self.view.bounds.width / 2, y: self.passwordTextField.frame.midY)
         }

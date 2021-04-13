@@ -58,6 +58,29 @@ class TableVC: UITableViewController {
         })
     }
     
+    
+    @IBAction func infoPressed(_ sender: UIButton) {
+        let cell = myTableView.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as! CustomCell
+        
+        if cell.additionalView.isHidden {
+            UIView.transition(with: cell.additionalView, duration: 0.3, options: .transitionFlipFromLeft, animations: {
+                cell.addSubview(cell.additionalView)
+                cell.additionalView.alpha = 1
+                cell.additionalView.isHidden = false
+            })
+        }
+        
+        else {
+            UIView.animate(withDuration: 0.1) {
+                cell.additionalView.frame.origin.x = cell.additionalView.frame.width
+                cell.additionalView.alpha = 0
+            } completion: { (Bool) in
+                cell.additionalView.frame.origin.x = 0
+                cell.additionalView.isHidden = true
+            }
+        }
+    }
+    
     func showDetailed(index: Int, cell: UITableViewCell, phone: Phone) -> UIView {
         let detailed = UIView()
         detailed.backgroundColor = .systemPink
@@ -109,26 +132,4 @@ class TableVC: UITableViewController {
         hideButton.leftAnchor.constraint(equalTo: name.rightAnchor, constant: CGFloat(10)).isActive = true
         return detailed
     }
-    
-    @IBAction func infoPressed(_ sender: UIButton) {
-        let cell = myTableView.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as! CustomCell
-        
-        if cell.additionalView.isHidden {
-            UIView.transition(with: cell.additionalView, duration: 0.3, options: .transitionFlipFromLeft, animations: {
-                cell.addSubview(cell.additionalView)
-                cell.additionalView.alpha = 1
-                cell.additionalView.isHidden = false
-            })
-        } else {
-            UIView.animate(withDuration: 0.3) {
-                cell.additionalView.frame.origin.x = cell.additionalView.frame.width
-                cell.additionalView.alpha = 0
-            } completion: { (Bool) in
-                cell.additionalView.frame.origin.x = 0
-                cell.additionalView.isHidden = true
-            }
-        }
-    }
-    
-    
 }
