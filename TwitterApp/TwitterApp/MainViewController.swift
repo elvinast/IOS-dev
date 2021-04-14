@@ -20,11 +20,22 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         tweets.count
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        myTableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "tweetCell", for: indexPath)
-        cell.textLabel?.text = tweets[indexPath.row].content
-        cell.detailTextLabel?.text = tweets[indexPath.row].author
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "tweetCell") as? CustomCell
+        cell?.content.text = tweets[indexPath.row].content
+        cell?.nameSurname.text = tweets[indexPath.row].author
+        cell?.hashtag.text = "#" + tweets[indexPath.row].hashtag!
+        cell?.date.text = tweets[indexPath.row].date
+        
+        cell?.contentView.layer.borderWidth = 1.0
+        cell?.contentView.layer.borderColor = UIColor.blue.cgColor
+        cell?.contentView.layer.cornerRadius = 10
+        
+        return cell!
     }
     
 
@@ -43,6 +54,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             self?.tweets.reverse()
             self?.myTableView.reloadData()
         }
+        myTableView.rowHeight = 180
     }
     
     @IBAction func goToProfile(_ sender: UIBarButtonItem) {
@@ -58,9 +70,18 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         alert.addTextField { (textField) in
             textField.placeholder = "What's up?"
         }
+        alert.addTextField { (textField) in
+            textField.placeholder = "Add hashtag"
+        }
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        let result = formatter.string(from: date)
+        
         alert.addAction(UIAlertAction(title: "Tweet", style: .default, handler: { [weak alert] (_) in
             let textField = alert?.textFields![0]
-            let tweet = Tweet(textField!.text!, (self.currentUser?.email)!)
+            let tag = alert?.textFields![1]
+            let tweet = Tweet(textField!.text!, (self.currentUser?.email)!, tag!.text!, result)
             Database.database().reference().child("tweets").childByAutoId().setValue(tweet.dict)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak alert] (_) in
