@@ -11,11 +11,13 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 
-class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Editable {
+    
     
     @IBOutlet weak var myTableView: UITableView!
     
     @IBOutlet weak var userNameSurname: UILabel!
+    @IBOutlet weak var surname: UILabel!
     @IBOutlet weak var userBirthday: UILabel!
     @IBOutlet weak var myImageView: UIImageView!
     
@@ -23,16 +25,52 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     var currentUser: User?
     
     private let storage = Storage.storage().reference()
+    let ref = Database.database().reference()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         myTweets.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
-        cell.textLabel?.text = myTweets[indexPath.row].content
-        cell.detailTextLabel?.text = myTweets[indexPath.row].author
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "myCell") as? ProfileCell
+        cell?.content.text = myTweets[indexPath.row].content
+        cell?.hashtag.text = "#" + myTweets[indexPath.row].hashtag!
+        cell?.date.text = myTweets[indexPath.row].date
+        
+        cell?.contentView.layer.borderWidth = 1.0
+        cell?.contentView.layer.borderColor = UIColor.blue.cgColor
+        cell?.contentView.layer.cornerRadius = 10
+        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        myTableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+            
+        let editAction = UIContextualAction(style: .normal, title: "Edit", handler: { (contextualAction, view, boolValue) in
+            
+        })
+
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete", handler: { (contextualAction, view, boolValue) in
+            
+            let userEmail = Auth.auth().currentUser?.email
+//            var idk = self.ref.child("tweets").queryOrdered(byChild: "email").queryEqual(toValue: self.currentUser?.email) // not works
+//            print(idk)
+//            idk.removeAllObservers()
+//            print(idk)
+            self.myTweets.remove(at: indexPath.row)
+            self.myTableView.deleteRows(at: [indexPath], with: .fade)
+            self.myTableView.reloadData()
+        })
+        
+        let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+        return swipeActions
     }
     
 
@@ -55,25 +93,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             self?.myTableView.reloadData()
         }
         
+        myTableView.rowHeight = 150
 //        let users = Database.database().reference().child("users")
-        let ref = Database.database().reference()
-//        ref.child("users/\(currentUser?.uid)/name").getData { [self] (error, snapshot) in
-//            if let error = error {
-//                    print("Error getting data \(error)")
-//                }
-//                else if snapshot.exists() {
-//                    print("Got data \(snapshot.value!)")
-//                }
-//                else {
-//                    print(ref.child("users/\(currentUser?.uid)/"))
-//                    print("No data available")
-//                }
-//        }
-//        print(users)
-//        users.observe(DataEventType.value) { (snapshot) in
-//            let postDict = snapshot.value as? [String : AnyObject] ?? [:]
-//        }
-        
+//        let ref = Database.database().reference()
         let userID = Auth.auth().currentUser?.uid
         ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
           // Get user value
@@ -82,8 +104,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             let surname = value?["surname"] as? String ?? ""
             let date = value?["date"] as? String ?? ""
 //          print(name)
-            self.userNameSurname.text = "\(name) \(surname)"
-            self.userBirthday.text = "Birthday: \(date)"
+            self.userNameSurname.text = name
+            self.surname.text = surname
+            self.userBirthday.text = date
           }) { (error) in
             print(error.localizedDescription)
         }
@@ -137,7 +160,33 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             present(mainPage, animated: true, completion: nil)
         }
     }
-    @IBAction func addNewTweet(_ sender: UIButton) {
+    
+    func edit(name: String, surname: String, date: Date) {
+        self.ref.child("users/\(Auth.auth().currentUser!.uid)/name").setValue(name)
+        self.ref.child("users/\(Auth.auth().currentUser!.uid)/surname").setValue(surname)
+        let df = DateFormatter()
+        df.dateFormat = "dd.MM.yyyy"
+        let newDate = df.string(from: date)
+        self.ref.child("users/\(Auth.auth().currentUser!.uid)/date").setValue(newDate)
+//        print(newDate)
+        self.userNameSurname.text = name
+        print(name)
+        self.surname.text = surname
+        self.userBirthday.text = newDate
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? EditProfileVC{
+            destination.delegate = self
+            destination.name = self.userNameSurname.text
+            destination.surname = self.surname.text
+            destination.date = self.userBirthday.text
+//            print(destination.date)
+//            print(self.userBirthday.text)
+        }
+    }
+    
+    @IBAction func editProfile(_ sender: UIButton) {
         
     }
 }

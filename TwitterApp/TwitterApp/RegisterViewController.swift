@@ -41,7 +41,7 @@ class RegisterViewController: UIViewController {
                     if name != "" && surname != ""{
 //                        print("hi")
                         let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "yyyy-MM-dd"
+                        dateFormatter.dateFormat = "dd.MM.yyyy"
                         let date = dateFormatter.string(from: (self?.datePicker.date)!)
                         let userData = [
                             "email": email!,

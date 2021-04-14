@@ -12,30 +12,22 @@ struct Tweet{
     
     var content: String?
     var author: String?
-//    var date: String?
-//    var hashtag: String?
-    
-    func getDate(date: Date) -> String{
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let dateStr = dateFormatter.string(from: date)
-        return dateStr
-    }
+    var date: String?
+    var hashtag: String?
         
-//    init(_ content: String, _ author: String, _ date: String, _ hashtag: String){
-    init(_ content: String, _ author: String) {
+    init(_ content: String, _ author: String, _ hashtag: String, _ date: String) {
         self.content = content
         self.author = author
-//        self.date = date
-//        self.hashtag = hashtag
+        self.date = date
+        self.hashtag = hashtag
     }
     
     var dict: [String: String]{
         return [
             "tweet": content!,
             "author": author!,
-//            "date": date!,
-//            "hashtag": hashtag!
+            "date": date!,
+            "hashtag": hashtag!
          ]
     }
     
@@ -44,8 +36,8 @@ struct Tweet{
         if let value = snapshot.value as? [String: String]{
             content = value["tweet"]
             author = value["author"]
-//            date = value["date"]
-//            hashtag = value["hashtag"]
+            date = value["date"]
+            hashtag = value["hashtag"]
         }
     }
 }
