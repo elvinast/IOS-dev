@@ -54,16 +54,59 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
             
         let editAction = UIContextualAction(style: .normal, title: "Edit", handler: { (contextualAction, view, boolValue) in
+            let alert = UIAlertController(title: "Edit tweet", message: "Enter a text", preferredStyle: .alert)
+            alert.addTextField { (textField) in
+                textField.text = self.myTweets[indexPath.row].content
+            }
+            alert.addTextField { (textField) in
+                textField.text = self.myTweets[indexPath.row].hashtag
+            }
+            let date = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd.MM.yyyy"
+            let newDate = formatter.string(from: date)
             
+            alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { [weak alert] (_) in
+                let myContent = alert?.textFields![0]
+                let tag = alert?.textFields![1]
+                
+                let usersRef = self.ref.child("tweets")
+                let queryRef = usersRef.queryOrdered(byChild: "tweet").queryEqual(toValue: self.myTweets[indexPath.row].content)
+                queryRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                    for snap in snapshot.children {
+                        let userSnap = snap as! DataSnapshot
+                        let uid = userSnap.key
+                        let userDict = userSnap.value as! [String:AnyObject]
+                        let content = userDict["tweet"] as! String
+//                        self.ref.child("tweets/\(uid)").removeValue()
+                        self.ref.child("tweets/\(uid)/hashtag").setValue(tag?.text)
+                        self.ref.child("tweets/\(uid)/tweet").setValue(myContent?.text)
+                        self.ref.child("tweets/\(uid)/date").setValue(newDate)
+                        print("key = \(uid), content = \(content)")
+                    }
+                })
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            
+            self.present(alert, animated: true, completion: nil)
+            self.myTableView.reloadData()
         })
 
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete", handler: { (contextualAction, view, boolValue) in
-            
-            let userEmail = Auth.auth().currentUser?.email
-//            var idk = self.ref.child("tweets").queryOrdered(byChild: "email").queryEqual(toValue: self.currentUser?.email) // not works
-//            print(idk)
-//            idk.removeAllObservers()
-//            print(idk)
+            let usersRef = self.ref.child("tweets")
+            let queryRef = usersRef.queryOrdered(byChild: "tweet").queryEqual(toValue: self.myTweets[indexPath.row].content)
+            queryRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                for snap in snapshot.children {
+                    let userSnap = snap as! DataSnapshot
+                    let uid = userSnap.key
+                    let userDict = userSnap.value as! [String:AnyObject]
+                    let content = userDict["tweet"] as! String
+                    self.ref.child("tweets/\(uid)").removeValue()
+                    print("key = \(uid), content = \(content)")
+                }
+            })
             self.myTweets.remove(at: indexPath.row)
             self.myTableView.deleteRows(at: [indexPath], with: .fade)
             self.myTableView.reloadData()

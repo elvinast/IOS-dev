@@ -10,14 +10,22 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var myTableView: UITableView!
+    
     var tweets: [Tweet] = []
+    var searchingTweets: [Tweet] = []
+    var isSearching = false
+    
     var currentUser: User?
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        tweets.count
+        if isSearching{
+            return searchingTweets.count
+        }
+        return tweets.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -25,11 +33,20 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "tweetCell") as? CustomCell
-        cell?.content.text = tweets[indexPath.row].content
-        cell?.nameSurname.text = tweets[indexPath.row].author
-        cell?.hashtag.text = "#" + tweets[indexPath.row].hashtag!
-        cell?.date.text = tweets[indexPath.row].date
+        
+        if isSearching{
+            cell?.content.text = searchingTweets[indexPath.row].content
+            cell?.nameSurname.text = searchingTweets[indexPath.row].author
+            cell?.hashtag.text = "#" + searchingTweets[indexPath.row].hashtag!
+            cell?.date.text = searchingTweets[indexPath.row].date
+        } else{
+            cell?.content.text = tweets[indexPath.row].content
+            cell?.nameSurname.text = tweets[indexPath.row].author
+            cell?.hashtag.text = "#" + tweets[indexPath.row].hashtag!
+            cell?.date.text = tweets[indexPath.row].date
+        }
         
         cell?.contentView.layer.borderWidth = 1.0
         cell?.contentView.layer.borderColor = UIColor.blue.cgColor
@@ -40,6 +57,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
 
     override func viewDidLoad() {
+        searchBar.delegate = self
+        
+//        searchBar.searchBarStyle = .minimal
+//        searchBar.showsSearchResultsButton = true
+        
+        
         super.viewDidLoad()
         currentUser = Auth.auth().currentUser
         let parent = Database.database().reference().child("tweets")
@@ -56,6 +79,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         myTableView.rowHeight = 180
     }
+    
+    
     
     @IBAction func goToProfile(_ sender: UIBarButtonItem) {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -88,5 +113,20 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchingTweets.removeAll()
+        for tweet in tweets {
+            print(searchText.lowercased())
+            if tweet.hashtag?.lowercased().range(of: searchText.lowercased()) != nil{
+                searchingTweets.append(tweet)
+            }
+        }
+        isSearching = true
+        if searchText == "" {
+            isSearching = false;
+        }
+        myTableView.reloadData()
     }
 }
