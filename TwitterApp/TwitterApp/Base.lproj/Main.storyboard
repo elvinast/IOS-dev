@@ -113,6 +113,9 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="oVQ-J0-as3" id="qta-hj-wtZ"/>
+                                </connections>
                             </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sYo-PP-NO4"/>
@@ -129,6 +132,7 @@
                     </view>
                     <connections>
                         <outlet property="myTableView" destination="tlk-lF-ngS" id="U71-nv-z7f"/>
+                        <outlet property="searchBar" destination="qys-U7-Uu8" id="zgg-Eg-5Ch"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c1e-2r-tRv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
