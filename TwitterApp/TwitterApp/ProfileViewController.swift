@@ -35,11 +35,16 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCell") as? ProfileCell
         cell?.content.text = myTweets[indexPath.row].content
         cell?.hashtag.text = "#" + myTweets[indexPath.row].hashtag!
-        cell?.date.text = myTweets[indexPath.row].date
+        cell?.date.text = "Posted: " + myTweets[indexPath.row].date!
+        
         
         cell?.contentView.layer.borderWidth = 1.0
-        cell?.contentView.layer.borderColor = UIColor.blue.cgColor
+        cell?.contentView.layer.borderColor = UIColor.white.cgColor
         cell?.contentView.layer.cornerRadius = 10
+        cell?.contentView.layer.shadowRadius = 10
+        cell?.contentView.layer.shadowColor = UIColor.blue.cgColor
+        cell?.contentView.layer.shadowOpacity = 0.35
+        
         return cell!
     }
     
@@ -247,12 +252,12 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
             return
         }
         
-        storage.child("images/file.png").putData(imageData, metadata: nil) { _, error in
+        storage.child("images/\(self.currentUser?.uid).png").putData(imageData, metadata: nil) { _, error in
             guard error == nil else {
                 print("Failed to upload")
                 return
             }
-            self.storage.child("images/file.png").downloadURL { url, error in
+            self.storage.child("images/\(self.currentUser?.uid).png").downloadURL { url, error in
                 guard let url = url, error == nil else{
                     return
                 }
