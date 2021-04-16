@@ -40,17 +40,20 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell?.content.text = searchingTweets[indexPath.row].content
             cell?.nameSurname.text = searchingTweets[indexPath.row].author
             cell?.hashtag.text = "#" + searchingTweets[indexPath.row].hashtag!
-            cell?.date.text = searchingTweets[indexPath.row].date
+            cell?.date.text = "Posted: " + searchingTweets[indexPath.row].date!
         } else{
             cell?.content.text = tweets[indexPath.row].content
             cell?.nameSurname.text = tweets[indexPath.row].author
             cell?.hashtag.text = "#" + tweets[indexPath.row].hashtag!
-            cell?.date.text = tweets[indexPath.row].date
+            cell?.date.text = "Posted: " + tweets[indexPath.row].date!
         }
         
         cell?.contentView.layer.borderWidth = 1.0
-        cell?.contentView.layer.borderColor = UIColor.blue.cgColor
+        cell?.contentView.layer.borderColor = UIColor.white.cgColor
         cell?.contentView.layer.cornerRadius = 10
+        cell?.contentView.layer.shadowRadius = 10
+        cell?.contentView.layer.shadowColor = UIColor.blue.cgColor
+        cell?.contentView.layer.shadowOpacity = 0.35
         
         return cell!
     }
